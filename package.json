@@ -1,0 +1,40 @@
+{
+  "name": "mock-stock-trader",
+  "version": "1.0.0",
+  "description": "Scratch Project for trading app",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack",
+    "dev" : "webpack-dev-server & nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venezuelan-shihtzu-moth/mock-stock-trader.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/venezuelan-shihtzu-moth/mock-stock-trader/issues"
+  },
+  "homepage": "https://github.com/venezuelan-shihtzu-moth/mock-stock-trader#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "body-parse": "^0.1.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "webpack": "^4.42.0",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.11"
+  }
+}
