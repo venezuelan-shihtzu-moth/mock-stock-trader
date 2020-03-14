@@ -25,6 +25,10 @@ app.get('/db', dbController.getData, (req, res) => {
   res.status(200).send(res.locals.data);
 });
 
+app.post('/signUp', loginController.signUp, (req, res) => {
+  res.status(200).send("Succesful sign up")
+})
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.listen(PORT, () => console.log(`Listening on Port: ${PORT}`));
