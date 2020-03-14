@@ -19,12 +19,23 @@ const dbController = require('./controllers/dbController');
 
 const app = express();
 const PORT = 3000;
-
-//  test route to handle db requests
-app.get('/db', dbController.getData, (req, res) => {
-  res.status(200).send(res.locals.data);
-});
-
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+//  test route to handle db requests
+// app.get('/db', dbController.getData, (req, res) => {
+//   res.status(200).send(res.locals.data);
+// });
+
+app.get(
+  '/price',
+  apiController.validateStock,
+  apiController.getStockPrice,
+  (req, res) => {
+    res.status(200).json(res.locals.price);
+  },
+);
+
+
+
 app.listen(PORT, () => console.log(`Listening on Port: ${PORT}`));
