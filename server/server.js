@@ -19,11 +19,24 @@ const dbController = require('./controllers/dbController');
 
 const app = express();
 const PORT = 3000;
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 //  test route to handle db requests
-app.get('/db', dbController.getData, (req, res) => {
-  res.status(200).send(res.locals.data);
-});
+// app.get('/db', dbController.getData, (req, res) => {
+//   res.status(200).send(res.locals.data);
+// });
+
+app.get(
+  '/price',
+  apiController.validateStock,
+  apiController.getStockPrice,
+  (req, res) => {
+    res.status(200).json(res.locals.price);
+  },
+);
+
+
 
 app.post('/signUp', loginController.signUp, (req, res) => {
   res.status(200).send("Succesful sign up")
