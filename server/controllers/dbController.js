@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const db = require('../db/queries.js');
+const db = require('../db/stockAppModel.js');
 
 const dbController = {};
 

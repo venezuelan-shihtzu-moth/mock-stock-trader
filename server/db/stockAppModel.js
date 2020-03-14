@@ -1,6 +1,10 @@
 /**
  * @name queries.js
- * @description connect to external database and 
+ * @description connect to external database to retrieve data via dbController
+ * @todo figure out Schema for database
+ * Tables :
+ * (Users : primary key: userid, username, password, networth)
+ * (BoughtStocks: primary key: id, userid, name, amount)
  */
 const { Pool } = require('pg');
 
