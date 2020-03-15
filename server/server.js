@@ -42,6 +42,17 @@ app.post('/signUp', loginController.signUp, (req, res) => {
   res.status(200).send("Succesful sign up")
 })
 
+
+//Route to login
+
+//Route to signup
+
+//Route to get stock data
+
+//Route to make a stock purchase
+
+//
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.listen(PORT, () => console.log(`Listening on Port: ${PORT}`));
