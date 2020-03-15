@@ -24,13 +24,15 @@ loginController.signUp = (req, res, next) => {
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
     // Store hash in your password DB.
     values.push(hash);
+    console.log(hash);
+    console.log(values);
   });
 
   const text = `INSERT INTO users (user_name, user_password, user_net_worth) VALUES ($1, $2, 1000)`;
 
   db.query(text, values, (error, results) => {
     if (error) {
-      throw error;
+      return next(error);
     }
   });
 
