@@ -40,12 +40,7 @@ app.post('/signUp', loginController.signUp, (req, res) => {
   res.status(200).send('Succesful sign up');
 });
 
-app.post('/logIn', loginController.logIn, (req, res) => {
-  if (res.locals.logIn === true) {
-    res.status(200).send('Succesful log in');
-  }
-  res.status(200).send('Log in failed');
-});
+app.post('/logIn', loginController.logIn);
 
 // Route to login
 

@@ -35,7 +35,7 @@ loginController.signUp = (req, res, next) => {
   return next();
 };
 
-loginController.logIn = (req, res, next) => {
+loginController.logIn = async (req, res, next) => {
   // Load hash from your password DB.
   const text = 'Select user_password from users where user_name=($1)';
   const value = [req.body.username];
@@ -51,14 +51,24 @@ loginController.logIn = (req, res, next) => {
     return next();
   });
 
-  bcrypt.compare(req.body.password, res.locals.hash, function(err, result) {
-    if (err) {
-      return next(err);
-    }
+  const match = await bcrypt.compare(
+    req.body.password,
+    res.locals.hash,
+    function(err, result) {
+      if (err) {
+        return next(err);
+      }
 
-    res.locals.logIn = result;
-    return next();
-  });
+      res.locals.logIn = result;
+      return next();
+    },
+  );
+
+  if (match){
+    res.status(200).send('login successful')
+  }
+
+  res.status(200).send('login failed')
 };
 
 module.exports = loginController;
