@@ -42,6 +42,10 @@ app.post('/signUp', loginController.signUp, (req, res) => {
   res.status(200).send("Succesful sign up")
 })
 
+app.post('/logIn', (req, res) => {
+  res.status(200).send("Succesful log in")
+})
+
 
 //Route to login
 
