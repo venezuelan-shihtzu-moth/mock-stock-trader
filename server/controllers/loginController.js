@@ -24,8 +24,6 @@ loginController.signUp = (req, res, next) => {
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
     // Store hash in your password DB.
     values.push(hash);
-    console.log(hash);
-    console.log(values);
   });
 
   const text = `INSERT INTO users (user_name, user_password, user_net_worth) VALUES ($1, $2, 1000)`;
@@ -40,10 +38,11 @@ loginController.signUp = (req, res, next) => {
 };
 
 loginController.logIn = (req, res, next) => {
-  //   // Load hash from your password DB.
-  //   bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
-  //     // result == true or false
-  //   });
+  // Load hash from your password DB.
+
+  bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
+    // result == true or false
+  });
 };
 
 module.exports = loginController;
