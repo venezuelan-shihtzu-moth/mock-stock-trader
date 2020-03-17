@@ -36,24 +36,24 @@ app.get(
   },
 );
 
-
-
 app.post('/signUp', loginController.signUp, (req, res) => {
-  res.status(200).send("Succesful sign up")
-})
+  res.status(200).send('Succesful sign up');
+});
 
-app.post('/logIn', (req, res) => {
-  res.status(200).send("Succesful log in")
-})
+app.post('/logIn', loginController.logIn, (req, res) => {
+  if (res.locals.logIn === true) {
+    res.status(200).send('Succesful log in');
+  }
+  res.status(200).send('Log in failed');
+});
 
+// Route to login
 
-//Route to login
+// Route to signup
 
-//Route to signup
+// Route to get stock data
 
-//Route to get stock data
-
-//Route to make a stock purchase
+// Route to make a stock purchase
 
 //
 
