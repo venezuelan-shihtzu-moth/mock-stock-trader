@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
+const bcrypt = require('bcrypt');
 const db = require('../db/stockAppModel');
 
+const saltRounds = 10;
 const loginController = {};
 
 // Signup
@@ -13,10 +15,6 @@ const loginController = {};
 // Take Username and Password data from front end
 // Use Bcrypt to verify correct password and compare with hashed pw in db
 // If the info is correct use JWTs or cookies to verify login\
-
-const bcrypt = require('bcrypt');
-
-const saltRounds = 10;
 
 loginController.signUp = (req, res, next) => {
   const values = [req.body.username];
@@ -39,9 +37,27 @@ loginController.signUp = (req, res, next) => {
 
 loginController.logIn = (req, res, next) => {
   // Load hash from your password DB.
+  const text = 'Select user_password from users where user_name=($1)';
+  const value = [req.body.username];
+  // let hash;
 
-  bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
-    // result == true or false
+  db.query(text, value, (error, results) => {
+    if (error) {
+      return next(error);
+    }
+
+    res.locals.hash = results.rows[0].user_password;
+    res.locals.password = req.body.password;
+    return next();
+  });
+
+  bcrypt.compare(req.body.password, res.locals.hash, function(err, result) {
+    if (err) {
+      return next(err);
+    }
+
+    res.locals.logIn = result;
+    return next();
   });
 };
 
