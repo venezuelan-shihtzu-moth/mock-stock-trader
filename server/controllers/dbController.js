@@ -12,4 +12,13 @@ dbController.getData = (req, res, next) => {
   });
 };
 
+dbController.getLeaderboard = (req, res, next) => {
+  const query = 'SELECT user_name, user_net_worth FROM users ORDER BY user_net_worth';
+  db.query(query, (err, data) => {
+    if(err)  return next(err);
+    else res.locals.leader = data.rows;
+    return next();
+  });
+}
+
 module.exports = dbController;

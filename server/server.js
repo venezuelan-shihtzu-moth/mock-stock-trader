@@ -1,6 +1,6 @@
 /**
  * @name server.js
- * @description Main server file for hosting our backend
+ * @description Main server file for hosting our backend. MAKE SURE TO MAKE ALL REQUESTS TO /backend route
  * @summary Need several components.
  *  Need a way to communicate with a database.
  *  Need way to communicate with API.
@@ -36,15 +36,20 @@ app.get(
   },
 );
 
+// Route to signup
 app.post('/signUp', loginController.signUp, (req, res) => {
   res.status(200).send('Succesful sign up');
 });
 
+// Route to login
 app.post('/logIn', loginController.logIn);
 
-// Route to login
 
-// Route to signup
+
+// Route to get stock leaderboard
+app.get('/leaderboard', dbController.getLeaderboard, (req, res) => {
+  res.status(200).json(res.locals.leader);
+})
 
 // Route to get stock data
 
