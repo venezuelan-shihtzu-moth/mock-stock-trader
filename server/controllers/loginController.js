@@ -53,6 +53,10 @@ loginController.logIn = (req, res, next) => {
       return next(error);
     }
 
+    if (results.rows[0] === undefined){
+      return res.status(418).send('login failed');
+    };
+
     res.locals.hash = results.rows[0].user_password;
     res.locals.password = req.body.password;
 
@@ -68,9 +72,8 @@ loginController.logIn = (req, res, next) => {
 
       res.status(200).send({access_token: token});
 
-      // res.status(200).send('login successful')
     } else {
-      res.status(200).send('login failed') }
+      res.status(418).send('login failed') }
   });
 };
 
