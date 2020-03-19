@@ -47,7 +47,6 @@ loginController.logIn = (req, res, next) => {
   // Load hash from your password DB.
   const text = 'Select user_password from users where user_name=($1)';
   const value = [req.body.username];
-  // let hash;
 
   db.query(text, value, async (error, results) => {
     if (error) {
@@ -57,16 +56,21 @@ loginController.logIn = (req, res, next) => {
     res.locals.hash = results.rows[0].user_password;
     res.locals.password = req.body.password;
 
-     const match = await bcrypt.compare(
+    const match = await bcrypt.compare(
       req.body.password,
       res.locals.hash
     );
-    console.log(match);
+
     if (match){
-      res.status(200).send('login successful')
+      const token = jwt.sign({
+        username: req.body.username
+      }, "cUlTurALcHaNgEoNlY", {expiresIn: "3 hours"});
+
+      res.status(200).send({access_token: token});
+
+      // res.status(200).send('login successful')
     } else {
       res.status(200).send('login failed') }
-    // console.log(match);
   });
 };
 
