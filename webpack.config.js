@@ -4,6 +4,12 @@ const path = require('path');
 module.exports = {
   devServer: {
     publicPath: '/build/',
+    proxy: {
+      '/backend': {
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/backend': '' },
+      },
+    },
   },
   mode: 'development',
   entry: './client/index.js',
