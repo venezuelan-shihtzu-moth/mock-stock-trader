@@ -1,6 +1,6 @@
 /**
  * @name server.js
- * @description Main server file for hosting our backend. MAKE SURE TO MAKE ALL REQUESTS TO /backend route
+ * @description Main server file for hosting our backend
  * @summary Need several components.
  *  Need a way to communicate with a database.
  *  Need way to communicate with API.
@@ -22,6 +22,14 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//jwt
+const jwt = require('jsonwebtoken');
+const expressjwt = require("express-jwt");
+const jwtCheck = expressjwt({    
+  secret: "cUlTurALcHaNgEoNlY"
+});
+//end of jwt
+
 //  test route to handle db requests
 // app.get('/db', dbController.getData, (req, res) => {
 //   res.status(200).send(res.locals.data);
@@ -36,20 +44,30 @@ app.get(
   },
 );
 
-// Route to signup
 app.post('/signUp', loginController.signUp, (req, res) => {
   res.status(200).send('Succesful sign up');
 });
 
-// Route to login
 app.post('/logIn', loginController.logIn);
 
+app.get('/home', (req, res) => {
+  res.status(200).send('home page mi amigos');
+})
 
+app.get('/home/logedIn', jwtCheck, (req, res) => {
+  res.status(200).send('loged in only page');
+})
 
-// Route to get stock leaderboard
+app.get("*", (req, res) => {
+  res.sendStatus(404);
+});
+
 app.get('/leaderboard', dbController.getLeaderboard, (req, res) => {
   res.status(200).json(res.locals.leader);
 })
+// Route to login
+
+// Route to signup
 
 // Route to get stock data
 

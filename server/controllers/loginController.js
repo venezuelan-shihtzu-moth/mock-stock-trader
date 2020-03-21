@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const db = require('../db/stockAppModel');
-
+const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 const loginController = {};
 
@@ -17,6 +17,10 @@ const loginController = {};
 // If the info is correct use JWTs or cookies to verify login\
 
 loginController.signUp = (req, res, next) => {
+  if (!req.body.username || !req.body.password){
+    return res.status(400).send('Username and Password Required')
+  }
+
   const values = [req.body.username];
 
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
@@ -35,40 +39,44 @@ loginController.signUp = (req, res, next) => {
   return next();
 };
 
-loginController.logIn = async (req, res, next) => {
+loginController.logIn = (req, res, next) => {
+
+  if (!req.body.username || !req.body.password){
+    return res.status(400).send('Username and Password Required')
+  }
   // Load hash from your password DB.
   const text = 'Select user_password from users where user_name=($1)';
   const value = [req.body.username];
-  // let hash;
 
-  db.query(text, value, (error, results) => {
+  db.query(text, value, async (error, results) => {
     if (error) {
       return next(error);
     }
 
+    if (results.rows[0] === undefined){
+      return res.status(418).send('login failed');
+    };
+
     res.locals.hash = results.rows[0].user_password;
     res.locals.password = req.body.password;
-    return next();
+
+    const match = await bcrypt.compare(
+      req.body.password,
+      res.locals.hash
+    );
+
+    if (match){
+      const token = jwt.sign({
+        username: req.body.username
+      }, "cUlTurALcHaNgEoNlY", {expiresIn: "3 hours"});
+
+      // res.status(200).send({access_token: token});
+      res.cookie('access_token', token, {httpOnly: true});
+      return res.send('succesfull log in');
+
+    } else {
+      return res.status(418).send('login failed') }
   });
-
-  const match = await bcrypt.compare(
-    req.body.password,
-    res.locals.hash,
-    function(err, result) {
-      if (err) {
-        return next(err);
-      }
-
-      res.locals.logIn = result;
-      return next();
-    },
-  );
-
-  if (match){
-    res.status(200).send('login successful')
-  }
-
-  res.status(200).send('login failed')
 };
 
 module.exports = loginController;
