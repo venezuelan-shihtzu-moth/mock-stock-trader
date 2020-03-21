@@ -16,9 +16,9 @@ class App extends Component {
   render() {
     return (
         <Router>
-            <div className='navigation'>
+            <nav className='navigation'>
             <header>Super Awesome Trading App!</header>
-            </div>
+            </nav>
         </Router>
     )
   }
