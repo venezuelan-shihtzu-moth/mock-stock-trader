@@ -70,10 +70,12 @@ loginController.logIn = (req, res, next) => {
         username: req.body.username
       }, "cUlTurALcHaNgEoNlY", {expiresIn: "3 hours"});
 
-      res.status(200).send({access_token: token});
+      // res.status(200).send({access_token: token});
+      res.cookie('access_token', token, {httpOnly: true});
+      return res.send('succesfull log in');
 
     } else {
-      res.status(418).send('login failed') }
+      return res.status(418).send('login failed') }
   });
 };
 
