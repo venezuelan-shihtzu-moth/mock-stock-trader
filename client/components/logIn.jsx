@@ -14,12 +14,12 @@ class LogIn extends Component {
     }
 
     clicked(event) {
-        fetch("/logIn", {
+        fetch("/backend/logIn", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
               username: this.refs.username.value,
-              password: this.refs.username.value
+              password: this.refs.password.value
             })
           }).then((response) => {
             return response.json();
@@ -31,7 +31,7 @@ class LogIn extends Component {
             <div>
                 <h5>Log In</h5>
                     <input ref="username" type="text" placeholder="username"/>
-                    <input ref="password" type="text" placeholder="password"/>\
+                    <input ref="password" type="text" placeholder="password"/>
                     <button onClick={ this.clicked }>Log In</button>
             </div>
         )
