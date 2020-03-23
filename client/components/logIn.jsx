@@ -31,7 +31,7 @@ class LogIn extends Component {
             <div>
                 <h5>Log In</h5>
                     <input ref="username" type="text" placeholder="username"/>
-                    <input ref="password" type="text" placeholder="password"/>
+                    <input ref="password" type="password" placeholder="password"/>
                     <button onClick={ this.clicked }>Log In</button>
             </div>
         )
