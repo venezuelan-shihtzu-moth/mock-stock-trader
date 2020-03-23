@@ -45,7 +45,7 @@ loginController.logIn = (req, res, next) => {
     return res.status(400).send('Username and Password Required')
   }
   // Load hash from your password DB.
-  const text = 'Select user_password from users where user_name=($1)';
+  const text = 'Select user_password, user_id from users where user_name=($1)';
   const value = [req.body.username];
 
   db.query(text, value, async (error, results) => {
@@ -58,6 +58,7 @@ loginController.logIn = (req, res, next) => {
     };
 
     res.locals.hash = results.rows[0].user_password;
+    res.locals.id = results.rows[0].user_id
     res.locals.password = req.body.password;
 
     const match = await bcrypt.compare(
@@ -69,9 +70,19 @@ loginController.logIn = (req, res, next) => {
       const token = jwt.sign({
         username: req.body.username
       }, "cUlTurALcHaNgEoNlY", {expiresIn: "3 hours"});
+      
+      // const text2 = 'Select user_id from users where user_name=($1)';
+      // db.query(text2, value, (error, results) => {
+      //   if (error){
+      //     return next(error);
+      //   }
 
-      // res.status(200).send({access_token: token});
+      //   res.cookie('user_id', results.rows[0].user_id);
+      // } )
+
       res.cookie('access_token', token, {httpOnly: true});
+      res.cookie('user_id', res.locals.id);
+      
       return res.send('succesfull log in');
 
     } else {
