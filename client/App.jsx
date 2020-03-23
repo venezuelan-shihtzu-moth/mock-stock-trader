@@ -28,7 +28,7 @@ class App extends Component {
                 <Route path='/signup'>
                   // Render signup component here
                 </Route>
-                <Route path='/login'>
+                <Route path="/logIn">
                   // Render login component here
                   <LogIn></LogIn>
                 </Route>
