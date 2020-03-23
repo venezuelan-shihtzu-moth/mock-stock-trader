@@ -5,8 +5,9 @@
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
-
+import LogIn from './components/logIn.jsx'
+// import { logIn } from '../server/controllers/loginController.js';
+ 
 //  Components needed: 
 class App extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends Component {
                 </Route>
                 <Route path='/login'>
                   // Render login component here
+                  <LogIn></LogIn>
                 </Route>
                 <Route path='/profitloss'>
                   // Render pl component here
