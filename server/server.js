@@ -30,12 +30,20 @@ const jwtCheck = expressjwt({
 });
 //end of jwt
 
+<<<<<<< HEAD
 //  test route to handle db requests
 // app.get('/db', dbController.getData, (req, res) => {
 //   res.status(200).send(res.locals.data);
 // });
 
 app.get('/price', apiController.validateStock, apiController.getStockPrice, (req, res) => {
+=======
+app.get(
+  '/price',
+  apiController.validateStock,
+  apiController.getStockPrice,
+  (req, res) => {
+>>>>>>> dev
     res.status(200).json(res.locals.price);
   },
 );
