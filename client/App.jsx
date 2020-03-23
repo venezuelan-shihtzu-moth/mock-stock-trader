@@ -4,28 +4,45 @@
  */
 
 import React, { Component } from 'react';
-import Leaderboard from './components/Leaderboard';
-import PLchart from './components/PLchart';
-import Signup from './components/Signup';
-import About from './components/About';
-import Nav from './Nav';
-
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Buy from './buy.js';
 
-function App () {
+//  Components needed: 
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return (
         <Router>
-            <div className="App">
-                <Nav />
-                <Switch>
-                    <Route path="/about" component={About} />
-                    <Route path="leaderboard" component={Leaderboard} />
-                    <Route path="plchart" component={PLchart} />
-                    <Route path="/" exact component={Signup} />
-                </Switch>
-            </div>
+            <nav className='navigation'>
+              <header>Super Awesome Trading App!</header>
+              <ul>
+              <li><Link to='/signup'>Sign Up</Link></li>
+              <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/buy'>Buy Stocks</Link></li>
+              <li><Link to='/profitloss'>Profit & Loss</Link></li>
+              </ul>
+              <Switch>
+                <Route path='/signup'>
+                  // Render signup component here
+                </Route>
+                <Route path='/login'>
+                  // Render login component here
+                </Route>
+                <Route path='/buy'>
+                  // Render buy component here
+                </Route>
+                <Route path='/profitloss'>
+                  // Render pl component here
+                </Route>
+                
+              </Switch>
+            </nav>
         </Router>
-    );
+    )
+  }
 }
 
 export default App;

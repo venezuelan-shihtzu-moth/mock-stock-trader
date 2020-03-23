@@ -22,6 +22,14 @@ const PORT = 3000;
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//jwt
+const jwt = require('jsonwebtoken');
+const expressjwt = require("express-jwt");
+const jwtCheck = expressjwt({    
+  secret: "cUlTurALcHaNgEoNlY"
+});
+//end of jwt
+
 //  test route to handle db requests
 // app.get('/db', dbController.getData, (req, res) => {
 //   res.status(200).send(res.locals.data);
@@ -41,6 +49,27 @@ app.post('/signUp', loginController.signUp, (req, res) => {
 });
 
 app.post('/logIn', loginController.logIn);
+
+app.get('/home', (req, res) => {
+  res.status(200).send('home page mi amigos');
+})
+
+app.get('/home/logedIn', jwtCheck, (req, res) => {
+  res.status(200).send('loged in only page');
+})
+
+// app.get('/leaderboard', dbController.getLeaderboard, (req, res) => {
+//   res.status(200).json(res.locals.leader);
+// })
+
+app.get('/profitloss', dbController.getUserStocks, apiController.getCurrentPrices, (req, res) => {
+  res.status(200).json(res.locals.stocks);
+})
+
+app.get("*", (req, res) => {
+  res.sendStatus(404);
+});
+
 
 // Route to login
 
