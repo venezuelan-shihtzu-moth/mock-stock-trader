@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import LogIn from './components/logIn.jsx';
 import Buy from './components/Buy.jsx';
 import PL from './components/PL.jsx';
+import SignUp2 from './components/newSignUp.jsx';
 // import { logIn } from '../server/controllers/loginController.js';
  
 //  Components needed: 
@@ -32,6 +33,7 @@ class App extends Component {
             <Switch>
                 <Route path='/signup'>
                   // Render signup component here
+                  <SignUp2></SignUp2>
                 </Route>
                 <Route path="/logIn">
                   // Render login component here

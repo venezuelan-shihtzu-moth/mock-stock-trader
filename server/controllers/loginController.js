@@ -70,19 +70,10 @@ loginController.logIn = (req, res, next) => {
       const token = jwt.sign({
         username: req.body.username
       }, "cUlTurALcHaNgEoNlY", {expiresIn: "3 hours"});
-      
-      // const text2 = 'Select user_id from users where user_name=($1)';
-      // db.query(text2, value, (error, results) => {
-      //   if (error){
-      //     return next(error);
-      //   }
-
-      //   res.cookie('user_id', results.rows[0].user_id);
-      // } )
 
       res.cookie('access_token', token, {httpOnly: true});
       res.cookie('user_id', res.locals.id);
-      
+
       return res.send('succesfull log in');
 
     } else {
