@@ -31,8 +31,8 @@ apiController.validateStock = (req, res, next) => {
 
 //  middleware function to grab a stock's price given a stock's symbol. Makes API call to finnhub
 apiController.getStockPrice = (req, res, next) => {
-  const { symbol } = req.body;
-  fetch(`https://finnhub.io/api/v1/quote/?symbol=${symbol}&token=${apiKey}`)
+  const { sym } = req.query;
+  fetch(`https://finnhub.io/api/v1/quote/?symbol=${sym}&token=${apiKey}`)
     .then(raw => raw.json())
     .then(data => {
       // grabs current price from the api response object and attach it to res.locals

@@ -19,12 +19,14 @@ class App extends Component {
             <nav className='navigation'>
               <header>Super Awesome Trading App!</header>
               <ul>
-              <li><Link to='/signup'>Sign Up</Link></li>
-              <li><Link to='/login'>Login</Link></li>
-              <li><Link to='/buy'>Buy Stocks</Link></li>
-              <li><Link to='/profitloss'>Profit & Loss</Link></li>
+                <li><Link to='/signup'>Sign Up</Link></li>
+                <li><Link to='/login'>Login</Link></li>
+                <li><Link to='/buy'>Buy Stocks</Link></li>
+                <li><Link to='/profitloss'>Profit & Loss</Link></li>
               </ul>
-              <Switch>
+            </nav>
+            <div>
+            <Switch>
                 <Route path='/signup'>
                   // Render signup component here
                 </Route>
@@ -39,7 +41,7 @@ class App extends Component {
                 </Route>
                 
               </Switch>
-            </nav>
+            </div>
         </Router>
     )
   }
