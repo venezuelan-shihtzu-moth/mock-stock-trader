@@ -54,8 +54,8 @@ app.get('/home/logedIn', jwtCheck, (req, res) => {
   res.status(200).send('loged in only page');
 })
 
-app.post('/buy', (req, res) => {
-  
+app.post('/buy',dbController.validateStockFunds, dbController.buyStock, dbController.deductFromUser, (req, res) => {
+  res.status(200).send("Buying stock ok!");
 })
 // app.get('/leaderboard', dbController.getLeaderboard, (req, res) => {
 //   res.status(200).json(res.locals.leader);

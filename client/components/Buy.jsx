@@ -32,7 +32,19 @@ class Buy extends Component {
             alert('Give valid inputs!');
             return;
         }
-        //  Make fetch request to 
+        //  Make fetch request to buy a stock given the stock name, price and number of stocks
+        fetch('/backend/buy', {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json',
+            },
+            body : JSON.stringify({
+                stock_name : this.state.stock,
+                price : Number(this.state.price),
+                number : Number(this.state.number)
+            })
+        })
+        .then(raw => raw.json())
     }
 
     changeNumber(event) {
