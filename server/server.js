@@ -62,8 +62,8 @@ app.get('/home/logedIn', jwtCheck, (req, res) => {
 //   res.status(200).json(res.locals.leader);
 // })
 
-app.get('/profitloss', dbController.getUserStocks, (req, res) => {
-  res.status(200).json(res.locals.data);
+app.get('/profitloss', dbController.getUserStocks, apiController.getCurrentPrices, (req, res) => {
+  res.status(200).json(res.locals.stocks);
 })
 
 app.get("*", (req, res) => {

@@ -42,4 +42,19 @@ apiController.getStockPrice = (req, res, next) => {
     .catch(err => next(err));
 };
 
+//  middleware that takes an array of stocks and gets the current price of each stock and appends it as a property of the array object element
+
+apiController.getCurrentPrices = (req, res, next) => {
+  const requests = res.locals.stocks.map(stock => {
+    return fetch(`https://finnhub.io/api/v1/quote/?symbol=${stock.ticker}&token=${apiKey}`)
+    .then(raw => raw.json())
+    .then(data => stock.current_price = data.c)
+  });
+  Promise.all(requests).then(result => {console.log(result);
+    return next();
+  })
+  .catch(err => next(err))
+}
+
+
 module.exports = apiController;

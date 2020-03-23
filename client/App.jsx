@@ -17,7 +17,24 @@ class App extends Component {
     return (
         <Router>
             <nav className='navigation'>
-            <header>Super Awesome Trading App!</header>
+              <header>Super Awesome Trading App!</header>
+              <ul>
+              <li><Link to='/signup'>Sign Up</Link></li>
+              <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/profitloss'>Profit & Loss</Link></li>
+              </ul>
+              <Switch>
+                <Route path='/signup'>
+                  // Render signup component here
+                </Route>
+                <Route path='/login'>
+                  // Render login component here
+                </Route>
+                <Route path='/profitloss'>
+                  // Render pl component here
+                </Route>
+                
+              </Switch>
             </nav>
         </Router>
     )
