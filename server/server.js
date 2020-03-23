@@ -56,6 +56,10 @@ app.get('/home/logedIn', jwtCheck, (req, res) => {
 app.get("*", (req, res) => {
   res.sendStatus(404);
 });
+
+app.get('/leaderboard', dbController.getLeaderboard, (req, res) => {
+  res.status(200).json(res.locals.leader);
+})
 // Route to login
 
 // Route to signup
