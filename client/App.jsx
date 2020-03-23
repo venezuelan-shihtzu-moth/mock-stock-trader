@@ -32,19 +32,19 @@ class App extends Component {
             <div>
             <Switch>
                 <Route path='/signup'>
-                  // Render signup component here
+                  
                   <SignUp2></SignUp2>
                 </Route>
                 <Route path="/logIn">
-                  // Render login component here
+                  
                   <LogIn></LogIn>
                 </Route>
                 <Route path='/buy'>
-                  // Render Buy component here
+                  
                   <Buy />
                 </Route>
                 <Route path='/profitloss'>
-                  // Render pl component here
+                  
                   <PL />
                 </Route>
                 
