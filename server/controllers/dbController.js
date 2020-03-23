@@ -21,4 +21,14 @@ dbController.getLeaderboard = (req, res, next) => {
   });
 }
 
+//  controller to grab stocks pertaining to a certain user
+dbController.getUserStocks = (req, res, next) => {
+  const query = 'SELECT * FROM stocks';
+  db.query(query, (err, data) => {
+    if(err) return next(err);
+    else res.locals.data = data.rows;
+    return next();
+  })
+}
+
 module.exports = dbController;
