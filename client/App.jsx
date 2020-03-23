@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import LogIn from './components/logIn.jsx';
 import Buy from './components/Buy.jsx';
+import PL from './components/PL.jsx';
 // import { logIn } from '../server/controllers/loginController.js';
  
 //  Components needed: 
@@ -42,6 +43,7 @@ class App extends Component {
                 </Route>
                 <Route path='/profitloss'>
                   // Render pl component here
+                  <PL />
                 </Route>
                 
               </Switch>
