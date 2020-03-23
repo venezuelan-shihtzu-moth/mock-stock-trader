@@ -16,7 +16,7 @@ const loginController = {};
 // Use Bcrypt to verify correct password and compare with hashed pw in db
 // If the info is correct use JWTs or cookies to verify login\
 
-loginController.signUp = (req, res, next) => {
+loginController.signUp = async (req, res, next) => {
   if (!req.body.username || !req.body.password){
     return res.status(400).send('Username and Password Required')
   }
@@ -26,17 +26,17 @@ loginController.signUp = (req, res, next) => {
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
     // Store hash in your password DB.
     values.push(hash);
+
+    const text = `INSERT INTO users (user_name, user_password, user_net_worth) VALUES ($1, $2, 1000)`;
+    console.log(values);
+    
+    db.query(text, values, (error, results) => {
+      if (error) {
+        return next(error);
+      }
+      return next();
+    });
   });
-
-  const text = `INSERT INTO users (user_name, user_password, user_net_worth) VALUES ($1, $2, 1000)`;
-
-  db.query(text, values, (error, results) => {
-    if (error) {
-      return next(error);
-    }
-  });
-
-  return next();
 };
 
 loginController.logIn = (req, res, next) => {
