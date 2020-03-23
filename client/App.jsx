@@ -5,7 +5,8 @@
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import LogIn from './components/logIn.jsx'
+import LogIn from './components/logIn.jsx';
+import Buy from './components/Buy.jsx';
 // import { logIn } from '../server/controllers/loginController.js';
  
 //  Components needed: 
@@ -20,16 +21,10 @@ class App extends Component {
             <nav className='navigation'>
               <header>Super Awesome Trading App!</header>
               <ul>
-<<<<<<< HEAD
                 <li><Link to='/signup'>Sign Up</Link></li>
                 <li><Link to='/login'>Login</Link></li>
                 <li><Link to='/buy'>Buy Stocks</Link></li>
                 <li><Link to='/profitloss'>Profit & Loss</Link></li>
-=======
-              <li><Link to='/signup'>Sign Up</Link></li>
-              <li><Link to='/login'>Login</Link></li>
-              <li><Link to='/profitloss'>Profit & Loss</Link></li>
->>>>>>> dev
               </ul>
             </nav>
             <div>
@@ -40,6 +35,10 @@ class App extends Component {
                 <Route path="/logIn">
                   // Render login component here
                   <LogIn></LogIn>
+                </Route>
+                <Route path='/buy'>
+                  // Render Buy component here
+                  <Buy />
                 </Route>
                 <Route path='/profitloss'>
                   // Render pl component here

@@ -15,19 +15,29 @@ class Buy extends Component {
         }
         this.handleGetStock = this.handleGetStock.bind(this);
         this.buyStock = this.buyStock.bind(this);
+        this.changeNumber = this.changeNumber.bind(this);
     }
 
     handleGetStock(event) {
-        const stocksymbol = document.getElementById('stksymbol').value;
-        console.log(stocksymbol);
-        fetch(`/backend/price?sym=${stocksymbol}`)
+        const stockSymbol = document.getElementById('stksymbol').value;
+        //console.log(stocksymbol);
+        fetch(`/backend/price?sym=${stockSymbol}`)
         .then(raw => raw.json())
-        .then(price => this.setState({stock : stocksymbol, price : price}))
-        
+        .then(price => this.setState({stock : stockSymbol, price : price}))
+        .catch(err => {console.log(err)});
     }
 
     buyStock(event) {
+        if(this.state.stock==='' || this.state.price === '0' || this.state.number === '0'){
+            alert('Give valid inputs!');
+            return;
+        }
+        //  Make fetch request to 
+    }
 
+    changeNumber(event) {
+        const num = document.getElementById('numofstocks').value;
+        this.setState({number : num});
     }
 
     render() {
@@ -41,7 +51,7 @@ class Buy extends Component {
                     <br />
                     <label htmlFor='numofstocks'>How many stocks?</label>
                     <br />
-                    <input type='number' id='numofstocks' />
+                    <input type='number' id='numofstocks' onChange={this.changeNumber} />
                     <input type='button' onClick={this.buyStock} value='Buy this many stocks' />
                 </form>
                 <span>Stock: {this.state.stock} Price: {this.state.price}</span>

@@ -15,9 +15,9 @@ const apiController = {};
 
 //  middleware to check if stock symbol is correct, if not, throw a global error
 apiController.validateStock = (req, res, next) => {
-  const { symbol } = req.body;
+  const { sym } = req.query;
   fetch(
-    `https://finnhub.io/api/v1/stock/profile/?symbol=${symbol}&token=${apiKey}`,
+    `https://finnhub.io/api/v1/stock/profile/?symbol=${sym}&token=${apiKey}`,
   )
     .then(raw => raw.json())
     .then(data => {
