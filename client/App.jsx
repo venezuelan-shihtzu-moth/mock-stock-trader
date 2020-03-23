@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import Buy from './buy.js';
 
 //  Components needed: 
 class App extends Component {
@@ -21,6 +21,7 @@ class App extends Component {
               <ul>
               <li><Link to='/signup'>Sign Up</Link></li>
               <li><Link to='/login'>Login</Link></li>
+              <li><Link to='/buy'>Buy Stocks</Link></li>
               <li><Link to='/profitloss'>Profit & Loss</Link></li>
               </ul>
               <Switch>
@@ -29,6 +30,9 @@ class App extends Component {
                 </Route>
                 <Route path='/login'>
                   // Render login component here
+                </Route>
+                <Route path='/buy'>
+                  // Render buy component here
                 </Route>
                 <Route path='/profitloss'>
                   // Render pl component here
